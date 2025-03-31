@@ -1,0 +1,827 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Jura', sans-serif; /* or 'Audiowide', sans-serif */
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  text-shadow: 
+    -1.5px -1.5px 3px rgba(46, 101, 103, 0.5), /* Slight blur and transparency */
+    1.5px -1.5px 3px rgba(46, 101, 103, 0.5), 
+    -1.5px 1.5px 3px rgba(46, 101, 103, 0.5),
+    1.5px 1.5px 3px rgba(46, 101, 103, 0.5);
+  overflow-y: scroll; /* Enable vertical scrolling */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on touch devices */
+  scrollbar-width: none; /* Firefox: Hide scrollbars */
+}
+
+html {
+  overflow-y: scroll; /* Enable vertical scrolling */
+}
+
+body::-webkit-scrollbar {
+  width: 0px; /* Chrome, Safari, and Opera: Hide scrollbars */
+  background: transparent; /* Optional: Set scrollbar background to transparent */
+}
+
+#video-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1; /* Make sure video is behind other content */
+}
+
+#background-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Cover the entire screen */
+}
+
+#quiz-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+  width: 100vw; /* Full viewport width */
+  position: relative; /* For relative positioning context */
+  padding: 20px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  max-width: 800px;
+  margin: auto;
+  color: #ffffff;
+  text-shadow: 
+    -1.5px -1.5px 3px rgba(46, 101, 103, 0.5), /* Slight blur and transparency */
+    1.5px -1.5px 3px rgba(46, 101, 103, 0.5), 
+    -1.5px 1.5px 3px rgba(46, 101, 103, 0.5),
+    1.5px 1.5px 3px rgba(46, 101, 103, 0.5);
+  z-index: 1; /* Ensure content is above the video */
+}
+
+#welcome-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+  width: 100vw; /* Full viewport width */
+  padding: 20px;
+  background: transparent url('../assets/portal.gif') center center no-repeat; /* Background GIF */
+  background-size: cover; /* Cover the entire screen */
+  position: relative; /* Ensure children can be absolutely positioned */
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  text-align: center;
+  z-index: 1; /* Ensure content is above the video */
+}
+
+#welcome-image {
+  position: absolute;
+  top: 60px; /* Adjust as needed */
+  left: 50%;
+  transform: translateX(-50%);
+  width: auto; /* Adjust width/height to fit your design */
+  height: 150px; /* Example height */
+}
+
+#welcome-text {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  font-weight: bold;
+  color: #ffffff;
+  text-shadow: 
+    -1.5px -1.5px 3px rgba(46, 101, 103, 0.5), /* Slight blur and transparency */
+    1.5px -1.5px 3px rgba(46, 101, 103, 0.5), 
+    -1.5px 1.5px 3px rgba(46, 101, 103, 0.5),
+    1.5px 1.5px 3px rgba(46, 101, 103, 0.5);
+  z-index: 1; /* Ensure text is above the GIF background */
+  width: 50%; /* Set the width to 30% */
+  text-align: center;
+  word-wrap: break-word; /* Ensure long words wrap to the next line */
+  max-width: 550px;
+}
+
+
+.start-button {
+  background-color: #e97c17;
+  color: #ffffff;
+  font-family: 'Jura', sans-serif; /* or 'Audiowide', sans-serif */
+  font-weight: bold;
+  padding: 10px 50px;
+  border-top: 0px solid #2e6567;    /* Small border on the top */
+  border-right: 5px solid #2e6567;  /* Same size border on the right */
+  border-bottom: 10px solid #2e6567; /* Larger border on the bottom */
+  border-left: 5px solid #2e6567;   /* Same size border on the left */
+  border-radius: 20px;             /* Optional: rounded corners */
+  font-size: 2rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  z-index: 1; /* Ensure button is above the GIF background */
+  box-shadow: 
+    0 4px 8px rgba(0, 0, 0, 0.2), /* Outer shadow for 3D effect */
+    0 2px 4px rgba(0, 0, 0, 0.5); /* More pronounced outer shadow */
+}
+
+.submit-button { 
+  margin-left: 40%;
+  position: relative;
+  margin-top: 10px;
+  background-color: #e97c17;
+  color: #ffffff;
+  font-family: 'Jura', sans-serif; /* or 'Audiowide', sans-serif */
+  font-weight: bold;
+  padding: 10px 15px;
+  border-top: 0px solid #2e6567;    /* Small border on the top */
+  border-right: 1px solid #2e6567;  /* Same size border on the right */
+  border-bottom: 1px solid #2e6567; /* Larger border on the bottom */
+  border-left: 1px solid #2e6567;   /* Same size border on the left */
+  border-radius: 20px;             /* Optional: rounded corners */
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  z-index: 1; /* Ensure button is above the GIF background */
+  box-shadow: 
+  0 1px 2px rgba(0, 0, 0, 0.2), /* Outer shadow for 3D effect */
+  0 1px 2px rgba(0, 0, 0, 0.5); /* More pronounced outer shadow */
+      }
+
+
+.start-button:hover {
+  background-color: #2e6567;
+  border-color: #2e6567; /* Change border color on hover */
+}
+
+.start-button:active {
+  background-color: #54c9cd;
+  border-color: #2e6567; /* Change border color on hover */
+}
+
+#progress-container {
+  position: fixed;
+  top: 10%;
+  max-width: 800px;
+  width: 90%;
+  background-color: #2e6567;
+  border-radius: 20px;
+  overflow: hidden;
+  height: 20px;
+  z-index: 2; /* Ensure it's on top */
+}
+
+#progress-bar {
+  height: 100%;
+  width: 0%; /* Will be updated by JavaScript */
+  background-color: #e97c17;
+  transition: width 0.3s ease;
+}
+
+#question-container {
+  position: fixed;
+  top: 50%; /* Center vertically */
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center horizontally */
+  text-align: center; /* Center text within container */
+  z-index: 1; /* Ensure it’s behind the progress bar */
+  width: 90%; /* Adjust this value as needed */
+  max-width: 800px;
+}
+
+#result, #detailed-results {
+  font-size: 1.8rem;
+  color: #ffffff;
+  text-shadow: 
+    -1.5px -1.5px 3px rgba(46, 101, 103, 0.5), /* Slight blur and transparency */
+    1.5px -1.5px 3px rgba(46, 101, 103, 0.5), 
+    -1.5px 1.5px 3px rgba(46, 101, 103, 0.5),
+    1.5px 1.5px 3px rgba(46, 101, 103, 0.5);
+}
+
+#question-text {
+  font-size: 1.8rem;
+  color: #ffffff;
+  text-shadow: 
+    -1.5px -1.5px 3px rgba(46, 101, 103, 0.5), /* Slight blur and transparency */
+    1.5px -1.5px 3px rgba(46, 101, 103, 0.5), 
+    -1.5px 1.5px 3px rgba(46, 101, 103, 0.5),
+    1.5px 1.5px 3px rgba(46, 101, 103, 0.5);
+    text-shadow: 0 4px 4px #004e4c;
+    -webkit-text-stroke-width: .7px;
+    -webkit-text-stroke-color: #08cdce;
+    font-family: Orbitron;
+    font-weight: 900;
+    color: #fff;
+}
+
+
+#answers {
+  position: fixed;
+  bottom: 10%; /* Distance from bottom */
+  left: 50%;
+  transform: translateX(-50%); /* Center horizontally */
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  width: 90%;
+  max-width: 700px;
+  z-index: 1; /* Ensure it’s behind the progress bar */
+}
+
+.answer-button {
+  background-color: #2e6567;
+  font-family: 'Jura', sans-serif;
+  color: white;
+  padding: 15px;
+  margin: 5px;
+  border: none;
+  border-radius: 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%; /* Set width automatically based on content */
+  max-width: 140px; /* Maximum width for buttons */
+}
+
+.answer-button:hover {
+  background-color: #e97c17;
+  text-shadow: 
+    -1.5px -1.5px 3px rgba(46, 101, 103, 0.5), /* Slight blur and transparency */
+    1.5px -1.5px 3px rgba(46, 101, 103, 0.5), 
+    -1.5px 1.5px 3px rgba(46, 101, 103, 0.5),
+    1.5px 1.5px 3px rgba(46, 101, 103, 0.5);
+}
+
+.answer-button:active {
+  background-color: #54c9cd;
+}
+
+.caption{
+
+  color: white;
+  font-family: poppins;
+  font-size: 50px;
+  margin-bottom: 10px;
+
+  text-align: center;
+  }
+
+.form-container {
+  place-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  }
+
+.info{
+  color: white;
+  font: poppins;
+  font-size: 20px;
+  text-align: center;
+
+  }
+
+.first-name{
+ margin-top: 20px;
+ margin-bottom: 10px;
+
+  }
+
+.last-name{
+margin-left: 20px;
+margin:center;
+
+}
+
+.email{
+  place-items: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 35%;
+  
+
+  }
+
+
+#feedback-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%; /* Slightly wider for better spacing */
+  max-width: 400px;
+  max-height: 80%; /* Limit the height to allow scrolling */
+  padding: 20px;
+  background-color: rgb(46, 101, 103); /* Match the form background */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  display: none; /* Hidden by default */
+  z-index: 999;
+  overflow-y: scroll; /* Enable vertical scrolling */
+  scrollbar-width: none; /* Hide scrollbar in Firefox */
+}
+
+/* Hide scrollbar for WebKit-based browsers (Chrome, Safari) */
+#feedback-popup::-webkit-scrollbar {
+  display: none; /* Hide scrollbar */
+}
+
+#feedback-popup.active {
+  display: block; /* Show when active */
+}
+
+#feedback-form {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Align items to the top */
+  align-items: center;
+  padding: 20px;
+}
+
+#feedback-form label {
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+  color: #ffffff;
+  text-align: left; /* Align labels to the left for consistency */
+}
+
+#feedback-form div input[type="checkbox"] {
+  display: block; /* Ensure the checkbox is on its own line */
+  margin-bottom: 10px; /* Add some space between checkboxes */
+}
+
+#feedback-form div label {
+  display: block; /* Make the label appear on its own line */
+  margin-bottom: 10px; /* Add spacing between labels */
+}
+
+#feedback-form input,
+#feedback-form textarea,
+#feedback-form select {
+  width: 100%;
+  max-width: 300px;
+  padding: 10px;
+  margin-bottom: 15px; /* Reduced margin for better spacing */
+  border: none;
+  border-radius: 20px;
+  font-size: 1rem;
+}
+
+#feedback-form textarea {
+  height: 100px; /* Maintain height for comments */
+}
+
+#feedback-form button {
+  background-color: #e97c17;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#feedback-form button:hover {
+  background-color: #2e6567;
+}
+
+.feedback-button {
+  background-color: #2e6567; /* Same color as answer buttons */
+  font-family: 'Jura', sans-serif;
+  color: white;
+  padding: 15px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.feedback-button:hover {
+  background-color: #e97c17; /* Same hover color as answer buttons */
+}
+
+.feedback-button:active {
+  background-color: #54c9cd;
+}
+
+.restart-button {
+  background-color: #2e6567; /* Same color as answer buttons */
+  font-family: 'Jura', sans-serif;
+  color: white;
+  padding: 15px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.restart-button:hover {
+  background-color: #e97c17; /* Same hover color as answer buttons */
+  text-shadow: 
+    -1.5px -1.5px 3px rgba(46, 101, 103, 0.5), /* Slight blur and transparency */
+    1.5px -1.5px 3px rgba(46, 101, 103, 0.5), 
+    -1.5px 1.5px 3px rgba(46, 101, 103, 0.5),
+    1.5px 1.5px 3px rgba(46, 101, 103, 0.5);
+}
+
+.restart-button:active {
+  background-color: #54c9cd;
+}
+
+#result-container {
+ 
+  align-content: center;
+  z-index: 10;
+  margin-top: 30px;
+  font-family: 'Jura', sans-serif;
+  text-align: center;
+  height: 100vh; /* Ensure it takes the full viewport height */
+  position: relative; /* Make sure it stays within its parent */
+  color: #ffffff;
+  text-shadow: 
+    -1.5px -1.5px 3px rgba(46, 101, 103, 0.5), /* Slight blur and transparency */
+    1.5px -1.5px 3px rgba(46, 101, 103, 0.5), 
+    -1.5px 1.5px 3px rgba(46, 101, 103, 0.5),
+    1.5px 1.5px 3px rgba(46, 101, 103, 0.5);
+}
+
+#result-text {
+  z-index: 10;
+  font-size: 1.8rem;
+  font-family: 'Jura', sans-serif;
+  margin-bottom: 20px; /* Space between text and image */
+}
+
+#result-animal-image {
+  z-index: 10;
+  display: block;
+  margin: 0 auto; /* Centers the image horizontally */
+  max-width: 50%; /* Adjust the size of the image */
+  height: auto; /* Maintains the aspect ratio */
+  padding-top: 20px; /* Adds some space above the image */
+}
+
+#detailed-results {
+  z-index: 10;
+  display: block;
+  align-items: center;
+  margin-left: 300px;
+  display: flex;
+  flex-direction: column; /* Stack buttons vertically */
+  align-items: flex-start; /* Align items to the left */
+  width: 100%; /* Ensure container takes full width */
+  box-sizing: border-box; /* Include padding in width calculation */
+  margin-left: 60px;
+}
+
+/* Detailed Results Button Styles */
+#detailed-results button {
+
+  font-family: poppins;
+  z-index: 10;
+  font-weight: bold;
+  background-color: #e97c17;
+  font-family: 'Jura', sans-serif;
+  color: white;
+  padding: 5px 20px;
+  font-size: 20px;
+  border: none;
+  text-align: left;
+  margin: 5px 0 2px 30%; /* Add left margin */
+  border-radius: 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  text-shadow: 
+    -1.5px -1.5px 3px rgba(46, 101, 103, 0.5),
+    1.5px -1.5px 3px rgba(46, 101, 103, 0.5), 
+    -1.5px 1.5px 3px rgba(46, 101, 103, 0.5),
+    1.5px 1.5px 3px rgba(46, 101, 103, 0.5);
+  width: auto; /* Adjust width based on content */
+  min-width: 100px; /* Ensure minimum width */
+}
+
+#detailed-results button:hover {
+  z-index: 10;
+  background-color: #2e6567; /* Change background color on hover */
+}
+
+#detailed-results button:active {
+  background-color: #54c9cd; /* Change background color when clicked */
+}
+
+.largest-button {
+  background-color: #2e6567 !important; /* Change to your desired color */
+}
+.largest-button:hover {
+  background-color: #e97c17 !important; /* Change to your desired color */
+}
+.largest-button:active {
+  background-color: #54c9cd !important; /* Change to your desired color */
+}
+
+/* Detailed Results Text Styles */
+#personality-details {
+  font-size: 1.8rem; /* Font size */
+  font-family: 'Jura', sans-serif; /* Font style */
+  color: #ffffff; /* Text color */
+  text-shadow: 
+    -1.5px -1.5px 3px rgba(46, 101, 103, 0.5), /* Text shadow effect */
+    1.5px -1.5px 3px rgba(46, 101, 103, 0.5), 
+    -1.5px 1.5px 3px rgba(46, 101, 103, 0.5),
+    1.5px 1.5px 3px rgba(46, 101, 103, 0.5);
+  white-space: pre-wrap; /* Ensure text wraps correctly */
+  overflow-wrap: break-word; /* Break long words to fit within container */
+  padding: 20px; /* Padding around text */
+  border-radius: 20px; /* Rounded corners */
+  margin: 20px 0; /* Margin around text */
+}
+
+#personality-details {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.details-box {
+  width: 40%;
+  display: inline-block;
+  padding: 10px;
+  margin: 10px 0;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  border-radius: 20px;
+  text-align: left;  /* Align text to the left */
+  font-size: 1rem;   /* Reduce the font size */
+  line-height: 1.4;  /* Adjust line height for better readability */
+}
+
+.large-text {
+  font-size: 1.3rem; /* Adjust the size as needed */
+  font-weight: bold; /* Optional, if you want it to remain bold */
+}
+
+.details-box ul {
+  list-style-type: disc; /* Default bullet style */
+  padding-left: 20px; /* Adjust indentation as needed */
+}
+
+.details-box.left {
+  align-self: flex-start;
+  background-color: #2e6567; /* Example background color */
+  font-size: 1.2rem;
+  padding-left: 20px;
+  padding-bottom: 20px;
+}
+
+.details-box.right {
+  align-self: flex-end;
+  background-color: #2e6567; /* Example background color */
+  font-size: 1.2rem;
+  padding-left: 20px;
+  padding-bottom: 20px;
+}
+
+#personality-details::before {
+  content: '';
+  position: absolute;
+  top: 1.5%;
+  bottom: 0;
+  left: 50%;
+  width: 3px;
+  background-color: #e97c17; /* Color for the middle line */
+  height: 97%;
+}
+
+#topper-for-line {
+  position: absolute; /* Make it independent */
+  left: 50%; /* Center it horizontally */
+  transform: translateX(-50%); /* Adjust for centering */
+  top: 0%; /* Adjust to position it slightly above the line */
+  width: 50px; /* Scale down the image width */
+  height: auto; /* Maintain aspect ratio */
+  z-index: 1; /* Ensure it's above the line */
+}
+
+#topper-for-line-2 {
+  position: absolute; /* Make it independent */
+  left: 50%; /* Center it horizontally */
+  transform:translateX(-50%) scaleY(-1); /* Adjust for centering */
+  top: 97%; /* Adjust to position it slightly above the line */
+  width: 50px; /* Scale down the image width */
+  height: auto; /* Maintain aspect ratio */
+  z-index: 1; /* Ensure it's above the line */
+}
+
+#description-image {
+  position: absolute; /* Make it independent */
+  left: 43%; /* Center it horizontally */
+  width: 100px; /* Scale down the image width */
+  transform: scaleX(-1);
+  height: auto; /* Maintain aspect ratio */
+  z-index: 1; /* Ensure it's above the line */
+  margin-top: -30px; /* Adjust this value to move arrows up or down if necessary */
+}
+#advantages-image {
+  position: absolute; /* Make it independent */
+  left: 45%; /* Center it horizontally */
+  width: 100px; /* Scale down the image width */
+  height: auto; /* Maintain aspect ratio */
+  z-index: 1; /* Ensure it's above the line */
+  margin-top: -30px; /* Adjust this value to move arrows up or down if necessary */
+}
+#disadvantages-image {
+  position: absolute; /* Make it independent */
+  left: 43%; /* Center it horizontally */
+  width: 100px; /* Scale down the image width */
+  transform: scaleX(-1);
+  height: auto; /* Maintain aspect ratio */
+  z-index: 1; /* Ensure it's above the line */
+  margin-top: -30px; /* Adjust this value to move arrows up or down if necessary */
+}
+#motivators-image {
+  position: absolute; /* Make it independent */
+  left: 45%; /* Center it horizontally */
+  width: 100px; /* Scale down the image width */
+  height: auto; /* Maintain aspect ratio */
+  z-index: 1; /* Ensure it's above the line */
+  margin-top: -30px; /* Adjust this value to move arrows up or down if necessary */
+}
+#demotivators-image {
+  position: absolute; /* Make it independent */
+  left: 43%; /* Center it horizontally */
+  width: 100px; /* Scale down the image width */
+  transform: scaleX(-1);
+  height: auto; /* Maintain aspect ratio */
+  z-index: 1; /* Ensure it's above the line */
+  margin-top: -30px; /* Adjust this value to move arrows up or down if necessary */
+}
+
+#scroll-text {
+  font-size: 1.5rem;
+  margin-bottom: 0px;
+}
+
+.scroll-arrow {
+  font-size: 3.5rem;
+  color: #e97c17;
+  text-shadow: 
+    -1.5px -1.5px 3px rgba(46, 101, 103, 0.5), /* Text shadow effect */
+    1.5px -1.5px 3px rgba(46, 101, 103, 0.5), 
+    -1.5px 1.5px 3px rgba(46, 101, 103, 0.5),
+    1.5px 1.5px 3px rgba(46, 101, 103, 0.5);
+  bottom: 0%;
+  left: 50%;
+  position: inherit;
+  transform: translateX(-50%);
+  animation: moveArrow 2s infinite ease-in-out;
+  z-index: 50;
+}
+
+@keyframes moveArrow {
+  0% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(10px);
+  }
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@media (max-width: 500px) {
+  #welcome-image {
+    position: absolute;
+    top: 100px; /* Adjust as needed */
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto; /* Adjust width/height to fit your design */
+    height: 110px; /* Example height */
+  }
+  #welcome-text {
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 
+      -1.5px -1.5px 3px rgba(46, 101, 103, 0.5), /* Slight blur and transparency */
+      1.5px -1.5px 3px rgba(46, 101, 103, 0.5), 
+      -1.5px 1.5px 3px rgba(46, 101, 103, 0.5),
+      1.5px 1.5px 3px rgba(46, 101, 103, 0.5);
+    z-index: 1; /* Ensure text is above the GIF background */
+    width: 90%;
+    text-align: center; /* Center align the text within its container */
+    word-wrap: break-word; /* Ensure long words wrap to the next line */
+    max-width: 550px;
+  }
+  #answers {
+    position: fixed; /* Changed to relative */
+    bottom: 10%; /* Remove fixed bottom position */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: row-reverse; /* Change to vertical stacking */
+    align-items: center;
+    width: 90%;
+    max-width: 800px;
+    z-index: 1; /* Ensure it’s behind the progress bar */
+  }
+  .answer-button {
+    background-color: #2e6567;
+    font-family: 'Jura', sans-serif;
+    color: white;
+    padding: 10px 5px;
+    margin: 5px;
+    border: none;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%; /* Full width for mobile */
+    max-width: 110px;
+  }
+  /* Stack the two outer buttons on top of the inner ones */
+  .answer-button:nth-child(1) {
+    position: relative;
+    bottom: 45px; 
+    left: -40px; 
+  }
+  /* Optional: Style the inner buttons for clarity */
+  .answer-button:nth-child(2) {
+    position: relative;
+    bottom: 0px; 
+    left: -10px; 
+  }
+  /* Optional: Style the inner buttons for clarity */
+  .answer-button:nth-child(3) {
+    position: relative;
+    bottom: -30px; /* Adjust this value to move them up */
+    left: 0px; /* Offset to the left (outer left button) */
+  }
+  .answer-button:nth-child(4) {
+    position: relative;
+    bottom: 0px; /* Adjust this value to move them up */
+    left: 10px; /* Offset to the left (outer left button) */
+  }
+  .answer-button:nth-child(5) {
+    position: relative;
+    bottom: 45px; /* Adjust this value to move them up */
+    left: 40px; /* Offset to the left (outer left button) */
+  }
+  #detailed-results button {
+    margin: 5px 0 2px 20%; /* Add left margin */
+  }
+  .start-button {
+    font-size: 1.8;
+  }
+  .restart-button, .feedback-button {
+    font-size: .8rem;
+  }
+  #question-text, #result, #detailed-results, #result-text {
+    font-size: 1.3rem;
+  }
+  #detailed-results {
+    width: 50%; /* Ensure container takes full width */
+    margin-left: 0px;
+  }
+  #detailed-results button {
+    font-size: .8rem; /* Adjust font size for smaller screens */
+    padding: 8px 16px; /* Adjust padding for smaller screens */
+  }
+  #personality-details {
+    font-size: 1.3rem; /* Adjust font size for smaller screens */
+    padding: 15px; /* Adjust padding for smaller screens */
+  }
+  .details-box {
+    width: 80%; /* Full width for mobile */
+    display: block; /* Stack vertically */
+    margin: 10px auto; /* Center horizontally */
+  }
+  .responsive-image {
+    display: none; /* Hide the images on mobile devices */
+  }
+  #personality-details::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 3%;
+    width: 0px;
+    background-color: #e97c17; /* Color for the middle line */
+  }
+}
